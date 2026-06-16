@@ -219,10 +219,10 @@ function initializeSQLite(db) {
     // Seeds
     // Passwords are hashed versions of: 'password123'
     db.run(`INSERT INTO users (name, email, password_hash, role) VALUES 
-      ('Glory Simon', 'admin@glorysimon.com', '$2a$10$FGC5rpD2S5gMI3B1ONq9AuRxTgcIEfgcirGUZPBI3lmMXGpuG7GsC', 'admin'),
-      ('Michael Vance', 'pm@glorysimon.com', '$2a$10$FGC5rpD2S5gMI3B1ONq9AuRxTgcIEfgcirGUZPBI3lmMXGpuG7GsC', 'project_manager'),
-      ('David Miller', 'engineer@glorysimon.com', '$2a$10$FGC5rpD2S5gMI3B1ONq9AuRxTgcIEfgcirGUZPBI3lmMXGpuG7GsC', 'site_engineer'),
-      ('Sarah Conner', 'vendor@glorysimon.com', '$2a$10$FGC5rpD2S5gMI3B1ONq9AuRxTgcIEfgcirGUZPBI3lmMXGpuG7GsC', 'vendor_coordinator')
+      ('Glory Simon', 'admin@glorysimon.com', '$2a$10$Z4b8c14hSOdAxqc76IxSEOQAO4Im9uEzeA4iXonawMurdjGN/sRe2', 'admin'),
+      ('Michael Vance', 'pm@glorysimon.com', '$2a$10$Z4b8c14hSOdAxqc76IxSEOQAO4Im9uEzeA4iXonawMurdjGN/sRe2', 'project_manager'),
+      ('David Miller', 'engineer@glorysimon.com', '$2a$10$Z4b8c14hSOdAxqc76IxSEOQAO4Im9uEzeA4iXonawMurdjGN/sRe2', 'site_engineer'),
+      ('Sarah Conner', 'vendor@glorysimon.com', '$2a$10$Z4b8c14hSOdAxqc76IxSEOQAO4Im9uEzeA4iXonawMurdjGN/sRe2', 'vendor_coordinator')
     `);
 
     db.run(`INSERT INTO suppliers (supplier_name, contact_person, phone, email, gst_number, address) VALUES

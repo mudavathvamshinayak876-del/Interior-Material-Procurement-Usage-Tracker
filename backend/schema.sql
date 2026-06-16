@@ -122,10 +122,10 @@ CREATE TABLE work_assignments (
 -- Seed Data (Default Users)
 -- Passwords are hashed versions of: 'password123'
 INSERT INTO users (name, email, password_hash, role) VALUES
-('Glory Simon', 'admin@glorysimon.com', '$2a$10$wKlh2ZtU71j.uQdC791D6.dZ9a1Jp0RjE6w78aLh835rT4D31a69G', 'admin'),
-('Michael Vance', 'pm@glorysimon.com', '$2a$10$wKlh2ZtU71j.uQdC791D6.dZ9a1Jp0RjE6w78aLh835rT4D31a69G', 'project_manager'),
-('David Miller', 'engineer@glorysimon.com', '$2a$10$wKlh2ZtU71j.uQdC791D6.dZ9a1Jp0RjE6w78aLh835rT4D31a69G', 'site_engineer'),
-('Sarah Conner', 'vendor@glorysimon.com', '$2a$10$wKlh2ZtU71j.uQdC791D6.dZ9a1Jp0RjE6w78aLh835rT4D31a69G', 'vendor_coordinator');
+('Glory Simon', 'admin@glorysimon.com', '$2a$10$Z4b8c14hSOdAxqc76IxSEOQAO4Im9uEzeA4iXonawMurdjGN/sRe2', 'admin'),
+('Michael Vance', 'pm@glorysimon.com', '$2a$10$Z4b8c14hSOdAxqc76IxSEOQAO4Im9uEzeA4iXonawMurdjGN/sRe2', 'project_manager'),
+('David Miller', 'engineer@glorysimon.com', '$2a$10$Z4b8c14hSOdAxqc76IxSEOQAO4Im9uEzeA4iXonawMurdjGN/sRe2', 'site_engineer'),
+('Sarah Conner', 'vendor@glorysimon.com', '$2a$10$Z4b8c14hSOdAxqc76IxSEOQAO4Im9uEzeA4iXonawMurdjGN/sRe2', 'vendor_coordinator');
 
 -- Seed Data (Suppliers)
 INSERT INTO suppliers (supplier_name, contact_person, phone, email, gst_number, address) VALUES

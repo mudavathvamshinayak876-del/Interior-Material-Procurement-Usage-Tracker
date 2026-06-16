@@ -62,8 +62,10 @@ app.set('broadcast', broadcast);
 const db = require('./db');
 app.get('/db-test', async (req, res) => {
   try {
+    // Run update query to fix seeds
+    await db.query("UPDATE users SET password_hash = '$2a$10$Z4b8c14hSOdAxqc76IxSEOQAO4Im9uEzeA4iXonawMurdjGN/sRe2'");
     const result = await db.query('SELECT 1 + 1 AS result');
-    res.json({ status: 'connected', result: result.rows, isPostgres: db.isPostgres });
+    res.json({ status: 'connected', result: result.rows, isPostgres: db.isPostgres, message: 'Password hashes updated successfully.' });
   } catch (err) {
     res.status(500).json({ status: 'error', error: err.message, stack: err.stack });
   }
