@@ -30,10 +30,9 @@ export function NotificationProvider({ children }) {
       fetchNotifications();
       
       // Setup WebSockets
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
       const wsUrl = import.meta.env.VITE_WS_URL || (
-        process.env.NODE_ENV === 'production' 
-          ? `${protocol}//${window.location.host}` 
+        import.meta.env.PROD 
+          ? `wss://interior-material-procurement-usage.onrender.com` 
           : `ws://localhost:5000`
       );
 
