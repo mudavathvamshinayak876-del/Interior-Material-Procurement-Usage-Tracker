@@ -16,7 +16,14 @@ if (usePg) {
   console.log('Database Configuration: PostgreSQL detected. Connecting...');
   const poolConfig = {};
   if (process.env.DATABASE_URL) {
-    poolConfig.connectionString = process.env.DATABASE_URL;
+    try {
+      const { URL } = require('url');
+      const parsedUrl = new URL(process.env.DATABASE_URL);
+      parsedUrl.searchParams.delete('sslmode');
+      poolConfig.connectionString = parsedUrl.toString();
+    } catch (e) {
+      poolConfig.connectionString = process.env.DATABASE_URL;
+    }
   } else {
     poolConfig.host = process.env.PGHOST;
     poolConfig.user = process.env.PGUSER;
