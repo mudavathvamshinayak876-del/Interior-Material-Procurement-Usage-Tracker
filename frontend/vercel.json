@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://YOUR_RENDER_BACKEND_URL/api/:path*"
+      "destination": "https://interior-material-procurement-usage.onrender.com/api/:path*"
     },
     {
       "source": "/uploads/:path*",
-      "destination": "https://YOUR_RENDER_BACKEND_URL/uploads/:path*"
+      "destination": "https://interior-material-procurement-usage.onrender.com/uploads/:path*"
     },
     {
       "source": "/((?!api|uploads).*)",
