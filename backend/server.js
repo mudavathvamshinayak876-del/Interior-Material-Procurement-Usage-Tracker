@@ -59,6 +59,16 @@ const broadcast = (data) => {
 app.set('broadcast', broadcast);
 
 // Mount API Routes
+const db = require('./db');
+app.get('/db-test', async (req, res) => {
+  try {
+    const result = await db.query('SELECT 1 + 1 AS result');
+    res.json({ status: 'connected', result: result.rows, isPostgres: db.isPostgres });
+  } catch (err) {
+    res.status(500).json({ status: 'error', error: err.message, stack: err.stack });
+  }
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/materials', materialRoutes);
