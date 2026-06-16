@@ -14,15 +14,19 @@ const usePg = process.env.DATABASE_URL || (process.env.PGHOST && process.env.PGU
 
 if (usePg) {
   console.log('Database Configuration: PostgreSQL detected. Connecting...');
-  const pool = new pg.Pool({
-    connectionString: process.env.DATABASE_URL,
-    host: process.env.PGHOST,
-    user: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
-    database: process.env.PGDATABASE,
-    port: process.env.PGPORT || 5432,
-    ssl: process.env.PGSSL === 'false' ? false : { rejectUnauthorized: false }
-  });
+  const poolConfig = {};
+  if (process.env.DATABASE_URL) {
+    poolConfig.connectionString = process.env.DATABASE_URL;
+  } else {
+    poolConfig.host = process.env.PGHOST;
+    poolConfig.user = process.env.PGUSER;
+    poolConfig.password = process.env.PGPASSWORD;
+    poolConfig.database = process.env.PGDATABASE;
+    poolConfig.port = process.env.PGPORT || 5432;
+  }
+  poolConfig.ssl = process.env.PGSSL === 'false' ? false : { rejectUnauthorized: false };
+
+  const pool = new pg.Pool(poolConfig);
   dbClient = pool;
   isPostgres = true;
   initializePostgres(pool);
