@@ -21,10 +21,11 @@ if (usePg) {
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE,
     port: process.env.PGPORT || 5432,
-    ssl: process.env.PGSSL === 'true' ? { rejectUnauthorized: false } : false
+    ssl: process.env.PGSSL === 'false' ? false : { rejectUnauthorized: false }
   });
   dbClient = pool;
   isPostgres = true;
+  initializePostgres(pool);
 } else {
   console.log('Database Configuration: PostgreSQL credentials not found. Falling back to local SQLite database...');
   const dbPath = path.join(__dirname, 'glory_simon.db');
@@ -39,6 +40,35 @@ if (usePg) {
   if (!dbExists) {
     console.log('Initializing local SQLite database with schemas and seeds...');
     initializeSQLite(sqliteDb);
+  }
+}
+
+// Function to initialize PostgreSQL schema and seeds
+async function initializePostgres(pool) {
+  try {
+    const res = await pool.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_schema = 'public' 
+        AND table_name = 'users'
+      );
+    `);
+    const exists = res.rows[0].exists;
+    if (!exists) {
+      console.log('PostgreSQL: Users table not found. Initializing schema and seed data...');
+      const schemaPath = path.join(__dirname, 'schema.sql');
+      if (fs.existsSync(schemaPath)) {
+        const schemaSql = fs.readFileSync(schemaPath, 'utf8');
+        await pool.query(schemaSql);
+        console.log('PostgreSQL database successfully initialized and seeded.');
+      } else {
+        console.error('PostgreSQL Schema file not found at:', schemaPath);
+      }
+    } else {
+      console.log('PostgreSQL: Schema already exists. Skipping initialization.');
+    }
+  } catch (err) {
+    console.error('Failed to initialize PostgreSQL database:', err);
   }
 }
 
