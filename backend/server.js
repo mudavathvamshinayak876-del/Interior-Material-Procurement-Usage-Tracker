@@ -93,3 +93,6 @@ server.listen(PORT, () => {
   console.log(`WebSocket server initialized on same port.`);
   console.log(`=======================================================`);
 });
+
+module.exports = app;
+

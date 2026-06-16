@@ -31,9 +31,11 @@ export function NotificationProvider({ children }) {
       
       // Setup WebSockets
       const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const wsUrl = process.env.NODE_ENV === 'production' 
-        ? `${protocol}//${window.location.host}` 
-        : `ws://localhost:5000`;
+      const wsUrl = import.meta.env.VITE_WS_URL || (
+        process.env.NODE_ENV === 'production' 
+          ? `${protocol}//${window.location.host}` 
+          : `ws://localhost:5000`
+      );
 
       const connectWS = () => {
         try {

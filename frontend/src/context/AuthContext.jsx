@@ -19,10 +19,12 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
+  const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+
   const login = async (email, password) => {
     setLoading(true);
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -70,7 +72,7 @@ export function AuthProvider({ children }) {
       headers['Authorization'] = `Bearer ${currentToken}`;
     }
 
-    const res = await fetch(url, {
+    const res = await fetch(`${API_BASE_URL}${url}`, {
       ...options,
       headers
     });
