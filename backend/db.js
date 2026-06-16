@@ -6,6 +6,9 @@ const sqlite3 = require('sqlite3');
 
 require('dotenv').config();
 
+// Globally allow self-signed certificates (required for connecting to cloud databases like Aiven)
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 let dbClient = null;
 let isPostgres = false;
 
@@ -19,7 +22,7 @@ if (usePg) {
     try {
       const { URL } = require('url');
       const parsedUrl = new URL(process.env.DATABASE_URL);
-      parsedUrl.searchParams.delete('sslmode');
+      parsedUrl.search = ''; // Strip all search parameters (sslmode, etc.) to prevent library overrides
       poolConfig.connectionString = parsedUrl.toString();
     } catch (e) {
       poolConfig.connectionString = process.env.DATABASE_URL;
