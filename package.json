@@ -1,0 +1,10 @@
+{
+  "name": "glory-simon-interiors-tracker",
+  "version": "1.0.0",
+  "description": "Enterprise Material Procurement & Usage Tracker for Glory Simon Interiors",
+  "scripts": {
+    "dev": "node dev.js"
+  },
+  "author": "Glory Simon Interiors",
+  "license": "ISC"
+}
