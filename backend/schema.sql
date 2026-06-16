@@ -29,6 +29,7 @@ CREATE TABLE projects (
     address TEXT,
     budget DECIMAL(15, 2) NOT NULL DEFAULT 0.00,
     status VARCHAR(50) NOT NULL DEFAULT 'planning' CHECK (status IN ('planning', 'active', 'completed', 'suspended')),
+    assigned_engineer_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
     start_date DATE,
     end_date DATE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
