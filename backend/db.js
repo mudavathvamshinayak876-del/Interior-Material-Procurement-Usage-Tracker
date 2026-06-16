@@ -2,6 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 const pg = require('pg');
+// Configure PG type parsers so numeric/decimal (1700) and bigint/count (20) values are returned as numbers
+pg.types.setTypeParser(1700, val => parseFloat(val));
+pg.types.setTypeParser(20, val => parseInt(val, 10));
 const sqlite3 = require('sqlite3');
 
 require('dotenv').config();
